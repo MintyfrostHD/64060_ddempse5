@@ -1,0 +1,52 @@
+---
+title: "Assignment1"
+output:
+  html_document:
+    df_print: paged
+  word_document: default
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+library(readr)
+DF <- read_csv("C:/Users/pc/Downloads/norway_new_car_sales_by_make.csv")
+View(DF)
+attach(DF)
+library(fBasics)
+## Question 3
+sum_q <- summary(Quantity)
+print(sum_q)
+qstats<- basicStats(Quantity)
+print(qstats)
+Pctstats<- basicStats(Pct)
+print(Pctstats)
+Tyear<- table(Year)
+print(Tyear)
+Tmake<- table(Make)
+print(Tmake)
+Make_Percent<- prop.table(Tmake)*100
+print(Make_Percent)
+## Question 4 Simple transformation
+data_transform<- transform(DF,Quantity=Quantity*100)
+print(data_transform)
+## Question 5 Plotting Data
+QvsPCT_plot<-plot(DF$Quantity,DF$Pct)
+library(ggplot2)
+QvsY_plot<- ggplot(DF, aes(y= Quantity,x=Year))+geom_point()
+print(QvsPCT_plot)
+print(QvsY_plot)
+
+ 
+
+
+
+
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
