@@ -433,8 +433,8 @@ UniversalBank_pred &lt;- select(UniversalBank,Age,Experience,Income,Family,CCAvg
 #Prep data for training and validation
 set.seed(123)
 train_index &lt;- createDataPartition(UniversalBank_pred$PersonalLoan, p = 0.6, list = FALSE)
-train_data &lt;- UniversalBank_pred[train_index, ]
-valid_data &lt;- UniversalBank_pred[-train_index, ]
+train_data &lt;- UniversalBank_pred[train_index,]
+valid_data &lt;- UniversalBank_pred[-train_index,]
 
 knn_model &lt;- knn(train_data[, -12], valid_data[, -12], train_data$PersonalLoan, k =1 )
 knn_model</code></pre>
@@ -535,26 +535,23 @@ confusion_matrix</code></pre>
   Income = 84,
   Family = 2,
   CCAvg = 2,
-  Education_1 = 0,
-  Education_2 = 1,
-  Education_3 = 0,
+  Education = 1,
   Mortgage = 0,
   SecuritiesAccount = 0,
+  PersonalLoan = 0,
   CDAccount = 0,
   Online = 1,
   CreditCard = 1
 )
 
-# Classify the new customer using the best k
+ #Classify the new customer using the best k
 best_k &lt;- knn_cv$bestTune$k
-#prediction &lt;- knn(train_data[, -12], new_customer, train_data$PersonalLoan, k = best_k)
+prediction &lt;- knn(train_data[, -12], new_customer[,-12], train_data$PersonalLoan, k = best_k)
 
-# Display the classification result for the new customer
-#prediction
+ #Display the classification result for the new customer
+View(prediction)
 
-#I&#39;ve run out of time and have been stuck on this part for a few hours but Im getting this error when trying to find the evaluation metrics 
-#Error in knn(train_data[, -12], new_customer, train_data$PersonalLoan,  : 
-  #dims of &#39;test&#39; and &#39;train&#39; differ</code></pre>
+#I&#39;ve run out of time on question #5, I cannot figure it out no matter how I run it. Thank you for the added time but it was not possible for me.</code></pre>
 
 
 
