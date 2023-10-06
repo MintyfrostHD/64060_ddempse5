@@ -85,7 +85,5 @@ prediction <- knn(train_data[, -12], new_customer[,-12], train_data$PersonalLoan
  #Display the classification result for the new customer
 View(prediction)
 
-#I've run out of time and have been stuck on this part for a few hours but Im getting this error when trying to find the evaluation metrics 
-#Error in knn(train_data[, -12], new_customer, train_data$PersonalLoan,  : 
-  #dims of 'test' and 'train' differ
+#I've run out of time on question #5, I cannot figure it out no matter how I run it. Thank you for the added time but it was not possible for me.
 ```
