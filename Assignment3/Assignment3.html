@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>Assignment3</title>
+	<meta name="generator" content="LibreOffice 7.4.3.2 (Linux)"/>
+	<meta name="created" content="2023-10-16T01:17:15"/>
+	<meta name="changed" content="2023-10-16T01:17:15"/>
+	<meta name="AppVersion" content="12.0000"/>
+	<meta name="output" content=""/>
+	<style type="text/css">
+		@page { size: 8.5in 11in; margin: 1in }
+		p { text-align: left; orphans: 2; widows: 2; margin-top: 0.13in; margin-bottom: 0.13in; direction: ltr; background: transparent }
+		a:link { color: #4f81bd }
+	</style>
+</head>
+<body lang="en-US" link="#4f81bd" vlink="#800000" dir="ltr"><p align="center" style="page-break-inside: avoid; margin-top: 0.33in; margin-bottom: 0.17in; page-break-after: avoid">
+<font color="#345a8a"><font face="Calibri, serif"><font size="5" style="font-size: 18pt"><b>Assignment3</b></font></font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">library</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(readr)</span></font></font><br/>
+<font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">library</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(class)</span></font></font><br/>
+<font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">library</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(caret)</span></font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+Loading required package: ggplot2</font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+Loading required package: lattice</font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">library</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(ISLR)</span></font></font><br/>
+<font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">library</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(dplyr)</span></font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+Attaching package: 'dplyr'</font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+The following objects are masked from 'package:stats':</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+    filter, lag</font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+The following objects are masked from 'package:base':</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+    intersect, setdiff, setequal, union</font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">library</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(tidyr)</span></font></font><br/>
+<font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">library</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(e1071)
+</span></font></font><br/>
+<br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">data
+</span></font></font><font color="#8f5902"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">&lt;-</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+</span></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">read_csv</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(</span></font></font><font color="#4e9a06"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">&quot;C:/Users/pc/Downloads/UniversalBank.csv&quot;</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">)</span></font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+Rows: 5000 Columns: 14</font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+── Column specification
+────────────────────────────────────────────────────────</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+Delimiter: &quot;,&quot;</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+dbl (14): ID, Age, Experience, Income, ZIP Code, Family, CCAvg,
+Education, M...</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+ℹ Use `spec()` to retrieve the full column specification for this
+data.</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet
+this message.</font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">set.seed</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(</span></font></font><font color="#0000cf"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">123</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">)</span></font></font><br/>
+<br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">train_indices</span></font></font><font color="#8f5902"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">&lt;-</span></font></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">createDataPartition</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(data</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">$</span></b></font></font></font><font color="#4e9a06"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">`</span></font></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">Personal
+Loan</span></font></font></font><font color="#4e9a06"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">`</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">,
+</span></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">p=</span></font></font></font><font color="#0000cf"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">0.6</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">,
+</span></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">list=</span></font></font></font><font color="#8f5902"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">FALSE</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">)</span></font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">train_data
+</span></font></font><font color="#8f5902"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">&lt;-</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">data[train_indices,]</span></font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">valid_data</span></font></font><font color="#8f5902"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">&lt;-</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">data[</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">-</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">train_indices,]</span></font></font><br/>
+<br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">pivot_table
+</span></font></font><font color="#8f5902"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">&lt;-</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+</span></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">table</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(train_data</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">$</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">CreditCard,
+train_data</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">$</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">Online,
+train_data</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">$</span></b></font></font></font><font color="#4e9a06"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">`</span></font></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">Personal
+Loan</span></font></font></font><font color="#4e9a06"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">`</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">)</span></font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">pivot_table</span></font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+, ,  = 0</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+   </font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+       0    1</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+  0  785 1145</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+  1  317  475</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+, ,  = 1</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+   </font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+       0    1</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+  0   65  122</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+  1   34   57</font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">prob
+</span></font></font><font color="#8f5902"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">&lt;-</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+pivot_table[</span></font></font><font color="#0000cf"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">2</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">,</span></font></font><font color="#0000cf"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">2</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">,</span></font></font><font color="#0000cf"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">2</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">]
+</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">/</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+</span></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">sum</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(pivot_table[</span></font></font><font color="#0000cf"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">2</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">,</span></font></font><font color="#0000cf"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">2</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">,])</span></font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">prob</span></font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+[1] 0.1071429</font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">pivot_PersonalLoan_online
+</span></font></font><font color="#8f5902"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">&lt;-</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+</span></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">table</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(train_data</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">$</span></b></font></font></font><font color="#4e9a06"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">`</span></font></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">Personal
+Loan</span></font></font></font><font color="#4e9a06"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">`</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">,
+train_data</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">$</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">Online)</span></font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">pivot_PersonalLoan_online</span></font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+   </font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+       0    1</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+  0 1102 1620</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+  1   99  179</font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">pivot_PersonalLoan_CreditCard
+</span></font></font><font color="#8f5902"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">&lt;-</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+</span></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">table</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(train_data</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">$</span></b></font></font></font><font color="#4e9a06"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">`</span></font></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">Personal
+Loan</span></font></font></font><font color="#4e9a06"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">`</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">,
+train_data</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">$</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">CreditCard)</span></font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">pivot_PersonalLoan_CreditCard</span></font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+   </font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+       0    1</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+  0 1930  792</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+  1  187   91</font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">P_CreditCard_given_PersonalLoan1
+</span></font></font><font color="#8f5902"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">&lt;-</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+pivot_PersonalLoan_CreditCard[</span></font></font><font color="#0000cf"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">2</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">,</span></font></font><font color="#0000cf"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">2</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">]
+</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">/</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+</span></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">sum</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(pivot_PersonalLoan_CreditCard[</span></font></font><font color="#0000cf"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">2</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">,])</span></font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">P_CreditCard_given_PersonalLoan1
+</span></font></font>
+</p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+[1] 0.3273381</font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">P_Online_given_PersonalLoan1
+</span></font></font><font color="#8f5902"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">&lt;-</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+pivot_PersonalLoan_online[</span></font></font><font color="#0000cf"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">2</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">,</span></font></font><font color="#0000cf"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">2</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">]
+</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">/</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+</span></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">sum</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(pivot_PersonalLoan_online[</span></font></font><font color="#0000cf"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">2</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">,])</span></font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">P_Online_given_PersonalLoan1
+</span></font></font>
+</p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+[1] 0.6438849</font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">P_PersonalLoan1
+</span></font></font><font color="#8f5902"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">&lt;-</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+</span></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">sum</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(train_data</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">$</span></b></font></font></font><font color="#4e9a06"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">`</span></font></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">Personal
+Loan</span></font></font></font><font color="#4e9a06"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">`</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">==</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+</span></font></font><font color="#0000cf"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">1</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">)
+</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">/</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+</span></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">nrow</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(train_data)</span></font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">P_PersonalLoan1
+</span></font></font>
+</p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+[1] 0.09266667</font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">P_CreditCard_given_PersonalLoan0
+</span></font></font><font color="#8f5902"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">&lt;-</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+pivot_PersonalLoan_CreditCard[</span></font></font><font color="#0000cf"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">1</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">,</span></font></font><font color="#0000cf"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">2</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">]
+</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">/</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+</span></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">sum</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(pivot_PersonalLoan_CreditCard[</span></font></font><font color="#0000cf"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">1</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">,])</span></font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">P_CreditCard_given_PersonalLoan0
+</span></font></font>
+</p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+[1] 0.2909625</font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">P_Online_given_PersonalLoan0
+</span></font></font><font color="#8f5902"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">&lt;-</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+pivot_PersonalLoan_online[</span></font></font><font color="#0000cf"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">1</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">,</span></font></font><font color="#0000cf"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">2</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">]
+</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">/</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+</span></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">sum</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(pivot_PersonalLoan_online[</span></font></font><font color="#0000cf"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">1</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">,])</span></font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">P_Online_given_PersonalLoan0
+</span></font></font>
+</p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+[1] 0.5951506</font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">P_PersonalLoan0
+</span></font></font><font color="#8f5902"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">&lt;-</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+</span></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">sum</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(train_data</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">$</span></b></font></font></font><font color="#4e9a06"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">`</span></font></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">Personal
+Loan</span></font></font></font><font color="#4e9a06"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">`</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">==</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+</span></font></font><font color="#0000cf"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">0</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">)
+</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">/</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+</span></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">nrow</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(train_data)</span></font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">P_PersonalLoan0</span></font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+[1] 0.9073333</font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">P_PersonalLoan1_CreditCard1_Online1
+</span></font></font><font color="#8f5902"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">&lt;-</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+(P_CreditCard_given_PersonalLoan1 </span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">*</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+P_Online_given_PersonalLoan1 </span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">*</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+P_PersonalLoan1) </span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">/</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+</span></font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+                           ((P_CreditCard_given_PersonalLoan1 </span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">*</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+P_Online_given_PersonalLoan1 </span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">*</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+P_PersonalLoan1) </span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">+</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+</span></font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+                            (P_CreditCard_given_PersonalLoan0 </span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">*</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+P_Online_given_PersonalLoan0 </span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">*</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+P_PersonalLoan0))</span></font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">P_PersonalLoan1_CreditCard1_Online1</span></font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+[1] 0.1105637</font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font color="#8f5902"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><i><b><span style="background: #f8f8f8">##
+For F, The Pivot table is more accurate estimate</span></b></i></font></font></font><br/>
+<br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">model
+</span></font></font><font color="#8f5902"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">&lt;-</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+</span></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">naiveBayes</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(data</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">$</span></b></font></font></font><font color="#4e9a06"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">`</span></font></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">Personal
+Loan</span></font></font></font><font color="#4e9a06"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">`</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">~</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+data</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">$</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">CreditCard
+</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">+</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+data</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">$</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">Online,
+</span></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">data
+=</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+train_data)</span></font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">model</span></font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+Naive Bayes Classifier for Discrete Predictors</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+Call:</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+naiveBayes.default(x = X, y = Y, laplace = laplace)</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+A-priori probabilities:</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+Y</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+    0     1 </font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+0.904 0.096 </font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+Conditional probabilities:</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+   data$CreditCard</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+Y        [,1]      [,2]</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+  0 0.2935841 0.4554540</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+  1 0.2979167 0.4578198</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+   data$Online</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+Y        [,1]      [,2]</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+  0 0.5957965 0.4907915</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+  1 0.6062500 0.4890903</font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">model_table
+</span></font></font><font color="#8f5902"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">&lt;-</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">
+</span></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">table</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(</span></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">predict</span></b></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">(model,
+train_data), train_data</span></font></font><font color="#ce5c00"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><b><span style="background: #f8f8f8">$</span></b></font></font></font><font color="#4e9a06"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">`</span></font></font></font><font color="#204a87"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">Personal
+Loan</span></font></font></font><font color="#4e9a06"><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">`</span></font></font></font><font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">)</span></font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+Warning in predict.naiveBayes(model, train_data): Type mismatch
+between</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+training and new data for variable 'data$CreditCard'. Did you use
+factors with</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+numeric labels for training, and numeric values for new data?</font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+Warning in predict.naiveBayes(model, train_data): Type mismatch
+between</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+training and new data for variable 'data$Online'. Did you use factors
+with</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+numeric labels for training, and numeric values for new data?</font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt"><span style="background: #f8f8f8">model_table</span></font></font></p>
+<p style="margin-top: 0in; margin-bottom: 0.14in; background: #f8f8f8">
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+   </font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+       0    1</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+  0 2722  278</font></font><br/>
+<font face="Consolas, serif"><font size="2" style="font-size: 11pt">##
+  1    0    0</font></font></p>
+<p class="first-paragraph">Add a new chunk by clicking the <i>Insert
+Chunk</i> button on the toolbar or by pressing <i>Ctrl+Alt+I</i>.</p>
+<p>When you save the notebook, an HTML file containing the code and
+output will be saved alongside it (click the <i>Preview</i> button or
+press <i>Ctrl+Shift+K</i> to preview the HTML file).</p>
+<p>The preview shows you a rendered HTML copy of the contents of the
+editor. Consequently, unlike <i>Knit</i>, <i>Preview</i> does not run
+any R code chunks. Instead, the output of the chunk when it was last
+run in the editor is displayed.</p>
+</body>
+</html>

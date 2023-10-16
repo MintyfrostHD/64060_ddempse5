@@ -1,0 +1,72 @@
+---
+title: "Assignment3"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+  word_document: default
+---
+
+```{r}
+library(readr)
+library(class)
+library(caret)
+library(ISLR)
+library(dplyr)
+library(tidyr)
+library(e1071) 
+
+data <- read_csv("C:/Users/pc/Downloads/UniversalBank.csv")
+
+set.seed(123)
+
+train_indices<-createDataPartition(data$`Personal Loan`, p=0.6, list=FALSE)
+train_data <-data[train_indices,]
+valid_data<-data[-train_indices,]
+
+pivot_table <- table(train_data$CreditCard, train_data$Online, train_data$`Personal Loan`)
+pivot_table
+
+prob <- pivot_table[2,2,2] / sum(pivot_table[2,2,])
+prob
+
+pivot_PersonalLoan_online <- table(train_data$`Personal Loan`, train_data$Online)
+pivot_PersonalLoan_online
+
+pivot_PersonalLoan_CreditCard <- table(train_data$`Personal Loan`, train_data$CreditCard)
+pivot_PersonalLoan_CreditCard
+
+P_CreditCard_given_PersonalLoan1 <- pivot_PersonalLoan_CreditCard[2,2] / sum(pivot_PersonalLoan_CreditCard[2,])
+P_CreditCard_given_PersonalLoan1 
+P_Online_given_PersonalLoan1 <- pivot_PersonalLoan_online[2,2] / sum(pivot_PersonalLoan_online[2,])
+P_Online_given_PersonalLoan1 
+P_PersonalLoan1 <- sum(train_data$`Personal Loan` == 1) / nrow(train_data)
+P_PersonalLoan1 
+P_CreditCard_given_PersonalLoan0 <- pivot_PersonalLoan_CreditCard[1,2] / sum(pivot_PersonalLoan_CreditCard[1,])
+P_CreditCard_given_PersonalLoan0 
+P_Online_given_PersonalLoan0 <- pivot_PersonalLoan_online[1,2] / sum(pivot_PersonalLoan_online[1,])
+P_Online_given_PersonalLoan0 
+P_PersonalLoan0 <- sum(train_data$`Personal Loan` == 0) / nrow(train_data)
+P_PersonalLoan0
+
+P_PersonalLoan1_CreditCard1_Online1 <- (P_CreditCard_given_PersonalLoan1 * P_Online_given_PersonalLoan1 * P_PersonalLoan1) / 
+                            ((P_CreditCard_given_PersonalLoan1 * P_Online_given_PersonalLoan1 * P_PersonalLoan1) + 
+                             (P_CreditCard_given_PersonalLoan0 * P_Online_given_PersonalLoan0 * P_PersonalLoan0))
+P_PersonalLoan1_CreditCard1_Online1
+
+## For F, The Pivot table is more accurate estimate
+
+model <- naiveBayes(data$`Personal Loan` ~ data$CreditCard + data$Online, data = train_data)
+model
+model_table <- table(predict(model, train_data), train_data$`Personal Loan`)
+model_table
+
+
+
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
