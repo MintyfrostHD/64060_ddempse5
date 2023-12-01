@@ -1,0 +1,35 @@
+---
+title: "Assignment_5"
+author: "David Dempsey"
+date: "2023-11-25"
+output: html_document
+---
+
+
+```{r cereals}
+library(readr)
+library(cluster)
+cereals <- read_csv("C:/Users/pc/Downloads/Cereals.csv")
+set.seed(123)
+cereals <- na.omit(cereals)
+cereals <- subset(cereals, select = -c(name, mfr, type))
+normalized_cereals <- scale(cereals)
+
+ward_cluster <- agnes(normalized_cereals, method = "ward")
+
+plot(ward_cluster, which.plots = 2, main = "Cluster Dendrogram")
+partition_A <- sample(1:2, nrow(normalized_cereals), replace = TRUE)
+partition_B <- 3 - partition_A
+
+# Using Dendrogram I decided 5 clusters
+cluster_A <- cutree(ward_cluster, k=5) 
+cluster_B <- cutree(ward_cluster,k = partition_B )
+
+consistency <- sum(cluster_A == cluster_B) / length(cluster_B)
+
+# Unsure exactly the best way to cluster healthy cereals but I made this
+healthy_cereals_cluster <- cluster_A[which(cereals$sugars < 4 & cereals$fiber > 4)]
+
+```
+
+
