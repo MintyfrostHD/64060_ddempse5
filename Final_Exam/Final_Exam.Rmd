@@ -1,0 +1,42 @@
+---
+title: "Final Exam"
+author: "David Dempsey"
+date: "2023-12-14"
+output: html_document
+---
+
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r cars}
+library(readxl)
+library(caret)
+library(ISLR)
+library(dplyr)
+library(class)
+library(cluster)
+fuel<- read_excel("C:/Users/pc/Documents/fuel_receipts_costs.xlsx")
+#Clean Up the Data to clear out columns with significant missing values
+fuel2 <- select(fuel,rowid,plant_id_eia,plant_id_eia_label,report_date,contract_type_code,contract_type_code_label,energy_source_code,energy_source_code_label,fuel_type_code_pudl,fuel_group_code,supplier_name,fuel_received_units,fuel_mmbtu_per_unit,sulfur_content_pct,ash_content_pct,data_maturity,data_maturity_label)
+
+
+set.seed(2392)
+fuel_sample <- fuel2[sample(nrow(fuel2), size=12000), ]
+train_index <- createDataPartition(fuel_sample$fuel_received_units, p = 0.75, list = FALSE)
+train_data <- fuel_sample[train_index,]
+valid_data <- fuel_sample[-train_index,]
+
+clean_Fuel <- fuel_sample %>% select(where(is.numeric))
+normalized_fuel <- scale(clean_Fuel)
+
+## I was attempting to do cluster analysis but Im commenting it out so I can summit my R markdown file
+#ward_cluster <- agnes(normalized_fuel, method = "ward.D2")
+
+
+
+
+
+
+```
